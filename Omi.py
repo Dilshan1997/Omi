@@ -3,7 +3,7 @@ import threading
 import re
 import time
 
-card_types = ['Spades', 'Diamond', 'Hearts', 'Clubs']
+card_types = ['Spades', 'Diamonds', 'Hearts', 'Clubs']
 card = {'A': 13, 'K': 12, 'Q': 11, 'J': 10, '10': 9, '9': 8, '8': 7, '7': 6}
 m1_card_pack=list()
 m2_card_pack=list()
@@ -174,23 +174,23 @@ class OmiGame:
             m1_card=input("put card- ")
             print(f'{self.m1} - {m1_card}')
             time.sleep(2)
-            m2_card=random.choice(m2_card_pack)
+            m2_card=self.card_selected_process(m1_card,m2_card_pack)
             print(f'{self.m2} - {m2_card}')
             time.sleep(2)
-            m3_card=random.choice(m3_card_pack)
+            m3_card=self.card_selected_process(m1_card,m3_card_pack)
             print(f'{self.m3} - {m3_card}')
             time.sleep(2)
-            m4_card=random.choice(m4_card_pack)
+            m4_card=self.card_selected_process(m1_card,m4_card_pack)
             print(f'{self.m4} - {m4_card}')
 
         elif player==self.m2:
             m2_card = random.choice(m2_card_pack)
             print(f'{self.m2} - {m2_card}')
             time.sleep(2)
-            m3_card = random.choice(m3_card_pack)
+            m3_card = self.card_selected_process(m2_card,m3_card_pack)
             print(f'{self.m3} - {m3_card}')
             time.sleep(2)
-            m4_card = random.choice(m4_card_pack)
+            m4_card = self.card_selected_process(m2_card,m4_card_pack)
             print(f'{self.m4} - {m4_card}')
             time.sleep(2)
             m1_card=input("put card- ")
@@ -202,13 +202,13 @@ class OmiGame:
             m3_card = random.choice(m3_card_pack)
             print(f'{self.m3} - {m3_card}')
             time.sleep(2)
-            m4_card = random.choice(m4_card_pack)
+            m4_card = self.card_selected_process(m3_card,m4_card_pack)
             print(f'{self.m4} - {m4_card}')
             time.sleep(2)
             m1_card = input("put card- ")
             print(f'{self.m1} - {m1_card}')
             time.sleep(2)
-            m2_card = random.choice(m2_card_pack)
+            m2_card = self.card_selected_process(m3_card,m2_card_pack)
             print(f'{self.m2} - {m2_card}')
             time.sleep(2)
 
@@ -219,20 +219,55 @@ class OmiGame:
             m1_card = input("put the card- ")
             print(f'{self.m1} - {m1_card}')
             time.sleep(2)
-            m2_card = random.choice(m2_card_pack)
+            m2_card = self.card_selected_process(m4_card,m2_card_pack)
             print(f'{self.m2} - {m2_card}')
             time.sleep(2)
-            m3_card = random.choice(m3_card_pack)
+            m3_card = self.card_selected_process(m4_card,m3_card_pack)
             print(f'{self.m3} - {m3_card}')
             time.sleep(2)
         return m1_card, m2_card, m3_card, m4_card
 
-    #
-    # def card_selected_process(self,initial_card):
-    #     self.card_serve()
-    #
-    #     card_type_using_round=re.split("",initial_card)
-    #     if(card_type_using_round[0]=="Spades"):
+
+    def card_selected_process(self,initial_card,player_card_pack):
+        spades_cards=list()
+        diamonds_cards=list()
+        hearts_cards=list()
+        clubs_cards=list()
+        card_type_using_round=re.split(" ",initial_card)
+        #print(card_type_using_round)
+        for j in range(0,len(m1_card_pack)):
+            o_card=player_card_pack[j]
+            card=re.split(" ",player_card_pack[j])
+            if card_type_using_round[0]=="Spades" and card_type_using_round[0]==card[0]:
+                spades_cards.append(o_card)
+            elif card_type_using_round[0]=="Diamonds" and card_type_using_round[0]==card[0]:
+                diamonds_cards.append(o_card)
+            elif card_type_using_round[0]=="Hearts" and card_type_using_round[0]==card[0]:
+                 hearts_cards.append(o_card)
+            elif card_type_using_round[0]=="Clubs" and card_type_using_round[0]==card[0]:
+                clubs_cards.append(o_card)
+
+        if(card_type_using_round[0]=="Spades" and len(spades_cards)>0):
+            selected_card=random.choice(spades_cards)
+            return selected_card
+        elif(card_type_using_round[0]=="Diamonds" and len(diamonds_cards)>0):
+            selected_card = random.choice(diamonds_cards)
+            return selected_card
+        elif (card_type_using_round[0] == "Hearts" and len(hearts_cards)>0):
+            selected_card = random.choice(hearts_cards)
+            return selected_card
+        elif (card_type_using_round[0] == "Clubs" and len(clubs_cards) > 0):
+            selected_card = random.choice(clubs_cards)
+            return selected_card
+        else:
+            return random.choice(player_card_pack)
+
+
+
+
+
+
+
 
 
 
