@@ -24,15 +24,13 @@ class OmiGame:
         print(card_pack)
 
         # card pack shuffeled
-        x=31
+        x=32
         for i in range(x):
             shuffel_card=card_pack[random.randrange(0, x)]
             card_pack.remove(shuffel_card)
             shuffeld_card_pack.append(shuffel_card)
             x=x-1
         print(shuffeld_card_pack)
-
-
 
 
     def __init__(self,t1,t2,m1,m2,m3,m4):
@@ -56,15 +54,16 @@ class OmiGame:
 
     #card_serve
     def card_serve(self):
-        for i in range(0,7):
+        print(len(shuffeld_card_pack))
+        for i in range(0,8):
             m1_card_pack.append(shuffeld_card_pack[i])
-        for i in range(8,15):
+        for i in range(8,16):
             m2_card_pack.append(shuffeld_card_pack[i])
-        for i in range(16,23):
+        for i in range(16,24):
             m3_card_pack.append(shuffeld_card_pack[i])
-        for i in range(24,31):
+        for i in range(24,32):
             m4_card_pack.append(shuffeld_card_pack[i])
-        print(m1_card_pack)
+        # print(m1_card_pack)
 
 
 
@@ -171,6 +170,7 @@ class OmiGame:
         m3_card=""
         m4_card=""
         if player==self.m1:
+            print(m1_card_pack)
             m1_card=input("put card- ")
             print(f'{self.m1} - {m1_card}')
             time.sleep(2)
@@ -193,6 +193,7 @@ class OmiGame:
             m4_card = self.card_selected_process(m2_card,m4_card_pack)
             print(f'{self.m4} - {m4_card}')
             time.sleep(2)
+            print(m1_card_pack)
             m1_card=input("put card- ")
             print(f'{self.m1} - {m1_card}')
             time.sleep(2)
@@ -205,6 +206,7 @@ class OmiGame:
             m4_card = self.card_selected_process(m3_card,m4_card_pack)
             print(f'{self.m4} - {m4_card}')
             time.sleep(2)
+            print(m1_card_pack)
             m1_card = input("put card- ")
             print(f'{self.m1} - {m1_card}')
             time.sleep(2)
@@ -216,6 +218,7 @@ class OmiGame:
             m4_card = random.choice(m4_card_pack)
             print(f'{self.m4} - {m4_card}')
             time.sleep(2)
+            print(m1_card_pack)
             m1_card = input("put the card- ")
             print(f'{self.m1} - {m1_card}')
             time.sleep(2)
@@ -261,14 +264,6 @@ class OmiGame:
             return selected_card
         else:
             return random.choice(player_card_pack)
-
-
-
-
-
-
-
-
 
 
 game=OmiGame("d1","d2","lal","kal","Lokz","chal")
