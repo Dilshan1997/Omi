@@ -21,7 +21,7 @@ class OmiGame:
         for card_type in card_types:
             for i in card.keys():
                 card_pack.append(card_type + " " + i)
-        print(card_pack)
+        # print(card_pack)
 
         # card pack shuffeled
         x=32
@@ -30,7 +30,7 @@ class OmiGame:
             card_pack.remove(shuffel_card)
             shuffeld_card_pack.append(shuffel_card)
             x=x-1
-        print(shuffeld_card_pack)
+        # print(shuffeld_card_pack)
 
 
     def __init__(self,t1,t2,m1,m2,m3,m4):
@@ -43,6 +43,7 @@ class OmiGame:
 
     #Key card type called
     def key_card_called(self,player):
+        print("###New Match Start### \n")
         if player==self.m1:
             first_four_cards=[shuffeld_card_pack[i] for i in range(4)]
             print(first_four_cards)
@@ -69,23 +70,26 @@ class OmiGame:
 
     def match(self,key_card_type,start_from):
         while(True):
+            time.sleep(1)
+            print("###New Round Start### \n")
+            print("key card type is: ", key_card_type,"\n")
             round_four_cards=self.round(start_from)
 
             m1_card_list=re.split(" ",round_four_cards[0])
-            print(m1_card_list)
+            # print(m1_card_list)
             m2_card_list= re.split(" ", round_four_cards[1])
-            print(m2_card_list)
+            # print(m2_card_list)
             m3_card_list=re.split(" ",round_four_cards[2])
-            print(m3_card_list)
+            # print(m3_card_list)
             m4_card_list = re.split(" ", round_four_cards[3])
-            print(m4_card_list)
+            # print(m4_card_list)
 
 
             m1_card_value = card[m1_card_list[1]]
             m2_card_value = card[m2_card_list[1]]
             m3_card_value = card[m3_card_list[1]]
             m4_card_value = card[m4_card_list[1]]
-            print(key_card_type)
+
 
             if m1_card_list[0] == key_card_type or m2_card_list[0]==key_card_type or m3_card_list[0]==key_card_type or m4_card_list[0]==key_card_type:
                 if m1_card_list[0]==key_card_type:
@@ -104,22 +108,23 @@ class OmiGame:
             m3_card_pack.remove(round_four_cards[2])
             m4_card_pack.remove(round_four_cards[3])
 
-            print(m1_card_value,m2_card_value,m3_card_value,m4_card_value)
+            # print(m1_card_value,m2_card_value,m3_card_value,m4_card_value)
             round_four_cards=[m1_card_value,m2_card_value,m3_card_value,m4_card_value]
-            print(max(round_four_cards))
+            # print(max(round_four_cards))
             winner=""
+            time.sleep(1)
             if(m1_card_value==max(round_four_cards)):
-                print(f"winner is {self.t1}")
+                print(f"##This round winners are {self.t1}## \n")
                 winner=self.m1
 
             elif (m2_card_value == max(round_four_cards)):
-                print(f"winner is {self.t2}")
+                print(f"##This round winners are {self.t2}## \n")
                 winner = self.m2
             elif (m3_card_value == max(round_four_cards)):
-                print(f"winner is {self.t1}")
+                print(f"##This round winners are {self.t1}## \n")
                 winner = self.m3
             elif (m4_card_value == max(round_four_cards)):
-                print(f"winner is {self.t2}")
+                print(f"This round winners are {self.t2}## \n")
                 winner = self.m4
 
             if(m1_card_value==max(round_four_cards) or m3_card_value==max(round_four_cards)):
@@ -139,8 +144,8 @@ class OmiGame:
             elif(self.round_count_t2==4 and self.round_count_t1==4):
                 print("This round is draw")
                 return 0
-            print(winner)
-
+            # print(winner)
+            time.sleep(1)
             return self.match(key_card_type, winner)
 
     def start_match(self):
@@ -152,9 +157,9 @@ class OmiGame:
             self.shuffele_card_pack()
             if player==order_of_called_thurumpu[3]:
                 player = order_of_called_thurumpu[0]
-                print(player)
+                print('start from:',player)
             key_card_type=self.key_card_called(player)
-            print(key_card_type)
+            # print(key_card_type)
             self.card_serve()
             #match proccess
             kata = self.match(key_card_type,player)
@@ -171,7 +176,7 @@ class OmiGame:
         m4_card=""
         if player==self.m1:
             print(m1_card_pack)
-            m1_card=input("put card- ")
+            m1_card=input("Your turn- ")
             print(f'{self.m1} - {m1_card}')
             time.sleep(2)
             m2_card=self.card_selected_process(m1_card,m2_card_pack)
@@ -194,7 +199,7 @@ class OmiGame:
             print(f'{self.m4} - {m4_card}')
             time.sleep(2)
             print(m1_card_pack)
-            m1_card=input("put card- ")
+            m1_card=input("Your turn- ")
             print(f'{self.m1} - {m1_card}')
             time.sleep(2)
 
@@ -207,7 +212,7 @@ class OmiGame:
             print(f'{self.m4} - {m4_card}')
             time.sleep(2)
             print(m1_card_pack)
-            m1_card = input("put card- ")
+            m1_card = input("Your turn- ")
             print(f'{self.m1} - {m1_card}')
             time.sleep(2)
             m2_card = self.card_selected_process(m3_card,m2_card_pack)
@@ -219,7 +224,7 @@ class OmiGame:
             print(f'{self.m4} - {m4_card}')
             time.sleep(2)
             print(m1_card_pack)
-            m1_card = input("put the card- ")
+            m1_card = input("Your turn- ")
             print(f'{self.m1} - {m1_card}')
             time.sleep(2)
             m2_card = self.card_selected_process(m4_card,m2_card_pack)
